@@ -1,4 +1,4 @@
-Default_Settings = {
+DefaultSettings = {
     UserName = "Player",
     Locale = "en_us",
     ResX = 1600,
@@ -104,9 +104,9 @@ function LoadSettings()
     local f, msg
     f, msg = io.open(get_settings_file(), 'r')
     if f == nil then
-        settings = Default_Settings
+        Settings = DefaultSettings
     else
-        settings = Deserialize(f:read('*a'))
+        Settings = Deserialize(f:read('*a'))
         f:close()
     end
 end
@@ -117,7 +117,7 @@ function SaveSettings()
     if f == nil then
         error(msg)
     else
-        f:write(format_json(Serialize(settings)))
+        f:write(format_json(Serialize(Settings)))
         f:close()
     end
 end
