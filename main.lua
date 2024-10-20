@@ -1,13 +1,22 @@
 --- Load files
 
+lstg = lstg or {}
+
 lstg.DoFile("core/Resources.lua")
+Include("core/Screen.lua")
+Include("core/i18n.lua")
 Include("core/Log.lua")
 Include("core/Global.lua")
 Include("core/Objects.lua")
 Include("core/Task.lua")
 Include("core/Input.lua")
 Include("core/StageSystem.lua")
-Include("core/Screen.lua")
+Include("core/ScoreData.lua")
+Include("core/Math.lua")
+Include("core/Audio.lua")
+Include("core/PostEffect.lua")
+
+Include("lib/HolosLib.lua")
 
 local Debug = require("core.Debug")
 
@@ -16,7 +25,7 @@ local Debug = require("core.Debug")
 function DoFrame()
     lstg.SetTitle(string.format("%s | %.2f FPS | %d OBJs", GameName, lstg.GetFPS(), lstg.GetnObj()))
 
-    GetInput()
+    Input.GetInput()
 
     if StageSystem.next_stage then
         StageSystem.Change()
@@ -47,10 +56,10 @@ function GameInit()
     Include('root.lua')
 
     InitAllClasses()
-    --InitScoreData()
+    InitScoreData()
 
-    --SetViewMode("world")
-    if StageSystem.entry_stage == nil then
+    SetViewMode("world")
+    if StageSystem.next_stage == nil then
         error("Entry stage not defined.")
     end
     SetResourceStatus("stage")

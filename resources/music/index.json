@@ -1,0 +1,13 @@
+[
+    {
+        "name": "menu",
+        "path": "menu.ogg",
+        "loop": {
+            "start_in_seconds": 0,
+            "end_in_seconds": 0
+        },
+        "metadata": {
+            "unlocked": true
+        }
+    }
+]

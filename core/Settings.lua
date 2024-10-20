@@ -7,6 +7,7 @@ DefaultSettings = {
     VSync = false,
     SEVolume = 25,
     BGMVolume = 40,
+    ---@class Settings.Keybinds
     Keybinds = {
         Up = KEY.UP,
 		Down = KEY.DOWN,

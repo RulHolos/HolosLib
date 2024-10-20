@@ -7,9 +7,9 @@ local function make_instance(C)
     return I
 end
 
---- stage_system.Stage
+--- StageSystem.Stage
 
----@class stage_system.Stage
+---@class StageSystem.Stage
 local S = {}
 
 S.stage_name = "__default__"
@@ -20,26 +20,25 @@ function S:frame() end
 function S:render() end
 function S:del() end
 
---- stage_system
+--- StageSystem
 
----@class stage_system
+---@class StageSystem
 local M = {}
 
 M.stages = {}
 M.current_stage = S
-M.entry_stage = S
 M.next_stage = S
 M.preserve_resources = false
 
 ---@param stage_name string
 ---@param is_entry_stage boolean
 ---@param is_menu boolean
----@return stage_system.Stage
+---@return StageSystem.Stage
 function M.New(stage_name, is_entry_stage, is_menu)
     assert(type(stage_name) == "string")
     assert(type(is_entry_stage) == "boolean" and type(is_menu) == "boolean")
 
-    ---@type stage_system.Stage
+    ---@type StageSystem.Stage
     local result = {
         init = S.init,
         frame = S.frame,
@@ -50,7 +49,7 @@ function M.New(stage_name, is_entry_stage, is_menu)
     }
     M.stages[stage_name] = result
     if is_entry_stage then
-        M.entry_stage = result
+        M.next_stage = result
     end
     return result
 end

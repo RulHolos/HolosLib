@@ -1,24 +1,37 @@
 KeyState = {}
 PreviousKeyState = {}
 
-function GetInput()
+local M = {}
+Input = M
+
+---@alias Settings.Keybinds.Keys
+---| '"Up"'
+---| '"Down"'
+---| '"Left"'
+---| '"Right"'
+---| '"Focus"'
+---| '"Shoot"'
+---| '"Spell"'
+---| '"Special"'
+
+function M.GetInput()
     for k, v in pairs(Settings.Keybinds) do
         PreviousKeyState[k] = KeyState[k]
         KeyState[k] = GetKeyState(v)
     end
 end
 
----@param key string
-function IsKeyDown(key)
+---@param key Settings.Keybinds.Keys
+function M.IsKeyDown(key)
     return KeyState[key]
 end
 
----@param key string
-function IsKeyPressed(key)
+---@param key Settings.Keybinds.Keys
+function M.IsKeyPressed(key)
     return KeyState[key] and (not PreviousKeyState[key])
 end
 
-function KeyCodeToName()
+function M.KeyCodeToName()
     local key2name = {}
 
     for k, v in pairs(lstg.Input.Keyboard or KEY) do

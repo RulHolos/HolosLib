@@ -74,3 +74,73 @@ function InitAllClasses()
         v[6] = v.del
     end
 end
+
+--- Global functions
+
+function RawDel(o)
+    if o then
+        o.status = 'del'
+        if o._servants then
+            --_del_servants(o)
+        end
+    end
+end
+
+function RawKill(o)
+    if o then
+        o.status = 'kill'
+        if o._servants then
+            --_kill_servants(o)
+        end
+    end
+end
+
+function PreserveObject(o)
+    o.status = 'normal'
+end
+
+local OldKill = Kill
+local OldDel = Del
+
+function Kill(o)
+    if o then
+        if o._servants then
+            --_kill_servants(o)
+        end
+        OldKill(o)
+    end
+end
+
+function Del(o)
+    if o then
+        if o._servants then
+            --_del_servants(o)
+        end
+        OldDel(o)
+    end
+end
+
+
+function SetV2(obj, v, angle, rot, aim)
+    if aim then
+        SetV(obj, v, angle + Angle(obj, Player), rot)
+    else
+        SetV(obj, v, angle, rot)
+    end
+end
+
+--- Tables
+
+function RemoveItemInArray(t, v)
+    for i = #t, 1, -1 do
+        if t[i] == v then
+            table.remove(t, i)
+        end
+    end
+end
+
+function ClearArray(t)
+    for i = #t, 1, -1 do
+        t[i] = nil
+    end
+end
